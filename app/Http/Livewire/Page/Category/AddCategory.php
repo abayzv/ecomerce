@@ -8,7 +8,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 
 class AddCategory extends Component
-{ 
+{
     use WithFileUploads;
 
     public $photo;
@@ -23,14 +23,19 @@ class AddCategory extends Component
         $this->category = new Category;
     }
     public function save()
-    {   
-        $this->category['image_url'] = $this->photo->store('products');
-        $this->category['slug'] = Str::slug($this->category['name']);
-        $this->category->save();
-        $this->category = new Category;
-        $this->photo = null;
-        $this->categories = Category::latest()->limit(5)->get();
-        session()->flash('message', 'Category Successfully Added');
+    {
+        // dd($this->photo);
+        if ($this->photo) {
+            $this->category['image_url'] = $this->photo->store('products');
+            $this->category['slug'] = Str::slug($this->category['name']);
+            $this->category->save();
+            $this->category = new Category;
+            $this->photo = null;
+            $this->categories = Category::latest()->limit(5)->get();
+            session()->flash('message', 'Category Successfully Added');
+        } else {
+            session()->flash('message', 'Category Failed to Add');
+        }
     }
     public function render()
     {

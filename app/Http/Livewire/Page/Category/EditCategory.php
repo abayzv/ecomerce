@@ -8,7 +8,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 
 class EditCategory extends Component
-{ 
+{
     use WithFileUploads;
 
     public $photo;
@@ -20,11 +20,11 @@ class EditCategory extends Component
     public function mount(Category $id)
     {
         $this->categories = Category::latest()->limit(5)->get();
-        $this->category = Category::find($id)->first();
+        $this->category = $id;
     }
     public function save()
-    {   
-        if($this->photo){
+    {
+        if ($this->photo) {
             $this->category['image_url'] = $this->photo->store('products');
         }
         $this->category['slug'] = Str::slug($this->category['name']);

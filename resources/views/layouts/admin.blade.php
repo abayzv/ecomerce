@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
+<html class="loading dark-layout" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
 <head>
@@ -19,6 +19,9 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -34,6 +37,9 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css"
         href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-invoice.css') }}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -122,6 +128,9 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="{{ asset('app-assets/vendors/js/forms/repeater/jquery.repeater.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -130,6 +139,7 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
+    <script src="{{ asset('app-assets/js/scripts/pages/app-invoice.js') }}"></script>
     <!-- END: Page JS-->
 
     <script>
@@ -143,8 +153,8 @@
         })
     </script>
 
-    @stack('scripts')
     @livewireScripts
+    @stack('scripts')
 </body>
 <!-- END: Body-->
 

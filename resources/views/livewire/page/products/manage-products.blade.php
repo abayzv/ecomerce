@@ -24,7 +24,7 @@
                     <td>{{ Str::upper($item->sku) }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->category->name }}</td>
-                    <td>Rp. {{ $item->getTotalPrice() }}</td>
+                    <td>Rp. {{ number_format($item->getTotalPrice()) }}</td>
                     <td>Rp. {{ number_format($item->sell_price) }}</td>
                     <td>{{ $item->stock() }}</td>
                     <td><img src="{{ asset('storage/' . $item->image_url) }}" alt="" width="50px"></td>

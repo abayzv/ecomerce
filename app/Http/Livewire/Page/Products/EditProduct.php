@@ -14,6 +14,7 @@ class EditProduct extends Component
     public $photo;
     public $product;
     public $products;
+    public $productId;
     protected $rules = [
         'product.sku' => 'required',
         'product.name' => 'required',
@@ -27,11 +28,11 @@ class EditProduct extends Component
     public function mount(Products $id)
     {
         $this->products = Products::latest()->limit(5)->get();
-        $this->product = Products::find($id)->first();
+        $this->product = $id;
     }
     public function save()
-    {   
-        if($this->photo){
+    {
+        if ($this->photo) {
             $this->product['image_url'] = $this->photo->store('products');
         }
         $this->product['slug'] = Str::slug($this->product['name']);

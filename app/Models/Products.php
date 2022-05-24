@@ -16,7 +16,7 @@ class Products extends Model
     }
     public function purchase()
     {
-        return $this->hasMany(Purchase::class, 'product_id');
+        return $this->hasMany(PurchaseItem::class, 'product_id');
     }
     public function stock()
     {
@@ -24,11 +24,11 @@ class Products extends Model
     }
     public function getTotalPrice()
     {
-        return DB::table('purchases')
-            ->join('products', 'purchases.product_id', '=', 'products.id')
-            ->select(DB::raw('SUM(purchases.price*purchases.quantity)/SUM(purchases.quantity) as avg_price'))
-            ->where('products.id', $this->id)
-            ->groupBy('products.name')
-            ->get();
+        $avg = PurchaseItem::select(DB::raw('SUM(price*quantity)/SUM(quantity) as price'))->where('product_id', $this->id)->first();
+        if ($avg == null) {
+            return 0;
+        } else {
+            return floor($avg->price);
+        }
     }
 }

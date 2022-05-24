@@ -7,10 +7,17 @@ use App\Http\Livewire\Page\Category\EditCategory;
 use App\Http\Livewire\Page\Category\ManageCategory;
 use App\Http\Livewire\Page\Contacts;
 use App\Http\Livewire\Page\Home;
+use App\Http\Livewire\Page\Home\ShowHome;
 use App\Http\Livewire\Page\Products\AddProduct;
 use App\Http\Livewire\Page\Products\EditProduct;
 use App\Http\Livewire\Page\Products\ManageProducts;
+use App\Http\Livewire\Page\Purchase\AddPurchase;
+use App\Http\Livewire\Page\Purchase\ManagePurchases;
+use App\Http\Livewire\Page\Purchase\PrintPurchase;
+use App\Http\Livewire\Page\Purchase\ShowPurchase;
 use App\Models\Products;
+use App\Models\Purchase;
+use App\Models\PurchaseItem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -25,9 +32,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ShowHome::class)->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -39,7 +44,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::middleware(['auth:sanctum','admin'])->group(function () {
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/admin', Home::class)->name('home');
     Route::get('/admin/products', ManageProducts::class)->name('products');
     Route::get('/admin/product/add', AddProduct::class)->name('add-product');
@@ -47,25 +52,13 @@ Route::middleware(['auth:sanctum','admin'])->group(function () {
     Route::get('/admin/categories', ManageCategory::class)->name('categories');
     Route::get('/admin/category/add', AddCategory::class)->name('add-caategory');
     Route::get('/admin/category/edit/{id}', EditCategory::class)->name('edit-caategory');
+    Route::get('/admin/purchases', ManagePurchases::class)->name('purchases');
+    Route::get('/admin/purchase/show/{id}', ShowPurchase::class);
+    Route::get('/admin/purchase/print/{id}', PrintPurchase::class);
+    Route::get('/admin/purchase/add', AddPurchase::class)->name('add-purchase');
 });
 
-Route::get('/test', function(){
-    // $product = Products::with(['purchase'])->get(DB);
-    // get average price each products join with purchase
-    // $avg = DB::table('purchases')
-    //     ->join('products', 'purchases.product_id', '=', 'products.id')
-    //     ->select(DB::raw('SUM(purchases.price*purchases.quantity)/SUM(purchases.quantity) as avg_price, products.name'))
-    //     ->groupBy('products.name')
-    //     ->get();
-    // $data = [
-    //     'stock' => $product[0]->purchase->sum('quantity'),
-    //     $avg
-    // ];
-    // return json_encode($product);
-    // get all products with
-
-    $product = Products::with(['purchase' => function($q){
-        $q->select('quantity');
-    }])->get();
-    dd($product);
+Route::get('/test', function () {
+    $purchase = Purchase::with('item')->get();
+    return json_encode($purchase);
 });

@@ -82,6 +82,13 @@
                     href="/admin/categories"><i class="bi bi-archive"></i><span class="menu-title text-truncate"
                         data-i18n="Email">Categories</span></a>
             </li>
+            <li class="navigation-header"><span data-i18n="Apps &amp; Pages">Transaction</span><i
+                    data-feather="more-horizontal"></i>
+            </li>
+            <li class="{{ $title == 'Purchases' ? 'active' : null }} nav-item"><a class="d-flex align-items-center"
+                    href="/admin/purchases"><i class="bi bi-cart-plus"></i><span class="menu-title text-truncate"
+                        data-i18n="Email">Purchase Order</span></a>
+            </li>
         </ul>
     </div>
 </div>
