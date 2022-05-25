@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class ProductWidget extends Component
+class BestSellerWidget extends Component
 {
     /**
      * Create a new component instance.
@@ -23,11 +23,6 @@ class ProductWidget extends Component
      */
     public function render()
     {
-        // curl product from https://fakestoreapi.com/products
-        $productsJson = json_decode(file_get_contents('https://fakestoreapi.com/products?limit=18'));
-        $products = array_chunk($productsJson, 6);
-        return view('components.product-widget', compact('products'));
-        // dd($products);
-        // return view('components.product-widget');
+        return view('components.best-seller-widget');
     }
 }
