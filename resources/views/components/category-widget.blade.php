@@ -2,7 +2,7 @@
     <div class="containers">
        <div class="category-wrapper bg-white">
         <div class="category-header">
-            Kategori
+            KATEGORI
         </div>
         <div class="category-content">
             <ul class="d-flex">
